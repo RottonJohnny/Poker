@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<head>
+<title>Texas Hold'Em Best Hand</title>
+<style>
+body {font-family:Arial;font-size:10pt;background-color:lightyellow}
+table {border:groove 5px blue;border-radius:10px}
+table#cards td {width:60px}
+//table#hands {font-size:8pt}
+th {text-align:center;border:groove 3px lightblue;border-radius:10px}
+td {text-align:center;border:groove 3px cyan;border-radius:10px;width:110px}
+.dealer:hover {font-weight:bold;color:green;background-color:yellow}
+</style>
+</head>
+
+<body>
+<table id="cards">
+<tr>
+<th>Hand 1</th><th>Hand 2</th><th>Hand 3</th>
+<th>Hand 4</th><th>Hand 5</th><th>Hand 6</th>
+<th colspan="3">Flop</th>
+<th>Turn</th><th>River</th>
+<td class="dealer" rowspan="2" onClick='deal();flop();turn();river();getBH();'>Deal</td>
+</tr>
+<tr>
+<td id="h1">_ _</td><td id="h2">_ _</td><td id="h3">_ _</td>
+<td id="h4">_ _</td><td id="h5">_ _</td><td id="h6">_ _</td>
+<td id="c1">_</td><td id="c2">_</td><td id="c3">_</td>
+<td id="c4">_</td><td id="c5">_</td>
+</tr>
+</table>
+<table id="hands">
+<tr><td id="bh1a">_</td><td id="bh2a">_</td><td id="bh3a">_</td>
+<td id="bh4a">_</td><td id="bh5a">_</td><td id="bh6a">_</td></tr>
+<tr><td id="bh1b">_</td><td id="bh2b">_</td><td id="bh3b">_</td>
+<td id="bh4b">_</td><td id="bh5b">_</td><td id="bh6b">_</td></tr>
+<tr><td id="bh1c">_</td><td id="bh2c">_</td><td id="bh3c">_</td>
+<td id="bh4c">_</td><td id="bh5c">_</td><td id="bh6c">_</td></tr>
+
+<tr><td id="bh1d">_</td><td id="bh2d">_</td><td id="bh3d">_</td>
+<td id="bh4d">_</td><td id="bh5d">_</td><td id="bh6d">_</td></tr>
+<tr><td id="bh1e">_</td><td id="bh2e">_</td><td id="bh3e">_</td>
+<td id="bh4e">_</td><td id="bh5e">_</td><td id="bh6e">_</td></tr>
+<tr><td id="bh1f">_</td><td id="bh2f">_</td><td id="bh3f">_</td>
+<td id="bh4f">_</td><td id="bh5f">_</td><td id="bh6f">_</td></tr>
+
+<tr><td id="bh1g">_</td><td id="bh2g">_</td><td id="bh3g">_</td>
+<td id="bh4g">_</td><td id="bh5g">_</td><td id="bh6g">_</td></tr>
+<tr><td id="bh1h">_</td><td id="bh2h">_</td><td id="bh3h">_</td>
+<td id="bh4h">_</td><td id="bh5h">_</td><td id="bh6h">_</td></tr>
+<tr><td id="bh1i">_</td><td id="bh2i">_</td><td id="bh3i">_</td>
+<td id="bh4i">_</td><td id="bh5i">_</td><td id="bh6i">_</td></tr>
+
+<tr><td id="bh1j">_</td><td id="bh2j">_</td><td id="bh3j">_</td>
+<td id="bh4j">_</td><td id="bh5j">_</td><td id="bh6j">_</td></tr>
+<tr><td id="bh1k">_</td><td id="bh2k">_</td><td id="bh3k">_</td>
+<td id="bh4k">_</td><td id="bh5k">_</td><td id="bh6k">_</td></tr>
+<tr><td id="bh1l">_</td><td id="bh2l">_</td><td id="bh3l">_</td>
+<td id="bh4l">_</td><td id="bh5l">_</td><td id="bh6l">_</td></tr>
+
+<tr><td id="bh1m">_</td><td id="bh2m">_</td><td id="bh3m">_</td>
+<td id="bh4m">_</td><td id="bh5m">_</td><td id="bh6m">_</td></tr>
+<tr><td id="bh1n">_</td><td id="bh2n">_</td><td id="bh3n">_</td>
+<td id="bh4n">_</td><td id="bh5n">_</td><td id="bh6n">_</td></tr>
+<tr><td id="bh1o">_</td><td id="bh2o">_</td><td id="bh3o">_</td>
+<td id="bh4o">_</td><td id="bh5o">_</td><td id="bh6o">_</td></tr>
+
+<tr><td id="bh1p">_</td><td id="bh2p">_</td><td id="bh3p">_</td>
+<td id="bh4p">_</td><td id="bh5p">_</td><td id="bh6p">_</td></tr>
+<tr><td id="bh1q">_</td><td id="bh2q">_</td><td id="bh3q">_</td>
+<td id="bh4q">_</td><td id="bh5q">_</td><td id="bh6q">_</td></tr>
+<tr><td id="bh1r">_</td><td id="bh2r">_</td><td id="bh3r">_</td>
+<td id="bh4r">_</td><td id="bh5r">_</td><td id="bh6r">_</td></tr>
+
+<tr><td id="bh1s">_</td><td id="bh2s">_</td><td id="bh3s">_</td>
+<td id="bh4s">_</td><td id="bh5s">_</td><td id="bh6s">_</td></tr>
+<tr><td id="bh1t">_</td><td id="bh2t">_</td><td id="bh3t">_</td>
+<td id="bh4t">_</td><td id="bh5t">_</td><td id="bh6t">_</td></tr>
+<tr><td id="bh1u">_</td><td id="bh2u">_</td><td id="bh3u">_</td>
+<td id="bh4u">_</td><td id="bh5u">_</td><td id="bh6u">_</td></tr>
+<tr><td id="bh1">_____</td><td id="bh2">_____</td><td id="bh3">_____</td>
+<td id="bh4">_____</td><td id="bh5">_____</td><td id="bh6">_____</td></tr>
+</table>
+
+</body>
+
+<script>
+
+// hand options
+
+h='0011111,0101111,0110111,0111011,0111101';
+h+=',0111110,1001111,1010111,1011011,1011101';
+h+=',1011110,1100111,1101011,1101101,1101110';
+h+=',1110011,1110101,1110110,1111001,1111010,1111100';
+
+ha=h.split(',');
+
+fs=function(a,b) {return a-b;};
+
+function getBH() {
+
+var i,j,k,crds;
+var cdTx;
+var bht,bhc;
+var htt,htc;
+
+for (k=0;k<6;k++) {
+crds=comm.concat(hand[k]);
+bht=[];
+bhc=0;
+for (j=1;j<22;j++) {
+cdTx='';
+htt=[];
+htc=0;
+for (i=0;i<7;i++) {
+if (ha[j-1].charAt(i)==1) {
+htt[htc++]=crds[i];
+cdTx+='<span style="color:'+(crds[i]<26?'black':'red')+'">'+dekV[crds[i]]+'</span> ';
+} //if
+} //i
+document.getElementById('bh'+(k+1)+String.fromCharCode(j+96)).innerHTML=cdTx;
+bht[bhc++]=testHand(htt,k+1);
+} //j
+
+document.getElementById('bh'+(k+1)).innerHTML=bestHand(bht);
+
+} //k
+
+
+}
+
+
+function testHand(hnd,pn) {
+var i,sui=new Array(),num=new Array();
+var quad=1,flush=1,straight=1;
+var fc,sto,qrt;
+
+for (i=0;i<5;i++) sui[i]=Math.floor(hnd[i]/13); // 0 spades, 1 clubs, 2 hearts, 3 diamonds
+for (i=0;i<5;i++) num[i]=hnd[i]%13;
+num.sort(fs);
+
+fc=sui[0];
+for (i=1;i<5;i++) if (sui[i]!=fc) {flush=0;break;}
+
+fc=num[0];
+for (i=1;i<5;i++) if (num[i]!=fc+i) {straight=0;break;}
+sto=fc+4;
+if (fc==0 && straight==0) {
+straight=1;
+for (i=1;i<5;i++) if (num[i]!=fc+8+i) {straight=0;break;}
+sto=0;
+}
+
+//straight flush
+if (straight==1 && flush==1) return [9,sto];
+
+//quads
+fc=num[0];
+for (i=1;i<4;i++) if (num[i]!=fc) {quad=0;break;}
+if (quad==1) return [8,[qrt,num[4]]];
+
+quad=1;
+fc=num[1];
+for (i=2;i<5;i++) if (num[i]!=fc) {quad=0;break;}
+if (quad==1) return [8,[qrt,num[0]]];
+
+
+//full house
+if (num[0]==num[1] && num[1]==num[2] && num[3]==num[4]) return [7,[num[0],num[3]]];
+if (num[0]==num[1] && num[2]==num[3] && num[3]==num[4]) return [7,[num[2],num[0]]];
+
+//flush
+if (flush==1) return [6,num.reverse()];
+
+//straight
+if (straight==1) return [5,sto];
+
+//trips
+if (num[0]==num[1] && num[1]==num[2]) return [4,[num[0],num[4],num[3]]];
+if (num[1]==num[2] && num[2]==num[3]) return [4,[num[1],num[4],num[0]]];
+if (num[2]==num[3] && num[3]==num[4]) return [4,[num[2],num[1],num[0]]];
+
+//two pair
+if (num[0]==num[1] && num[2]==num[3]) return [3,[num[2],num[0],num[4]]];
+if (num[0]==num[1] && num[3]==num[4]) return [3,[num[3],num[0],num[2]]];
+if (num[1]==num[2] && num[3]==num[4]) return [3,[num[3],num[1],num[0]]];
+
+//pair
+if (num[0]==num[1]) return [2,[num[0],num[4],num[3],num[2]]];
+if (num[1]==num[2]) return [2,[num[1],num[4],num[3],num[0]]];
+if (num[2]==num[3]) return [2,[num[2],num[4],num[1],num[0]]];
+if (num[3]==num[4]) return [2,[num[3],num[2],num[1],num[0]]];
+
+//high card
+return [1,num.reverse()];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function bestHand(hnd) {
+hnd.sort(function(a,b) {return a[0]-b[0];});
+return hnd[hnd.length-1];
+}
+
+
+
+
+
+
+
+
+
+
+// initialization and shuffle functions
+
+init();
+
+function init() {
+suit=['♠','♣','♥','♦'];
+rank=['A','2','3','4','5','6','7','8','9','X','J','Q','K'];
+dekV=new Array(); //visual deck
+dekN=new Array(); //numerical deck
+for (i=0;i<4;i++)
+for (j=0;j<13;j++) {
+dekV[i*13+j]=rank[j]+suit[i];
+dekN[i*13+j]=i*13+j;
+}
+clearTable();
+}
+
+function shuffle() {
+var i;
+dekS=new Array(); //shuffled deck 
+for (i=0;i<52;i++)
+dekS.push(dekN.splice(rInt(dekN.length),1));
+buildN();
+}
+
+function rInt(n) {
+return Math.floor(Math.random()*n);
+}
+
+function buildN() {
+var i,j;
+for (i=0;i<4;i++)
+for (j=0;j<13;j++)
+dekN[i*13+j]=i*13+j;
+}
+
+// card dealing functions
+
+function clearTable() {
+var i;
+for (i=1;i<7;i++)
+document.getElementById('h'+i).innerText='_ _';
+for (i=1;i<6;i++)
+document.getElementById('c'+i).innerText='_';
+ch=false;cf=false;ct=false;cr=false; // hand, flop, turn, river cards dealt
+}
+
+function deal() {
+var i, cdTx='';
+shuffle();
+hand=new Array(); // player's hands
+clearTable();
+for (i=0;i<6;i++) hand[i]=[dekS.pop()];
+for (i=0;i<6;i++) hand[i].push(dekS.pop());
+for (i=0;i<6;i++) {
+cdTx='<span style="color:'+(hand[i][0]<26?'black':'red')+'">'+dekV[hand[i][0]]+'</span> ';
+cdTx+='<span style="color:'+(hand[i][1]<26?'black':'red')+'">'+dekV[hand[i][1]]+'</span>';
+document.getElementById('h'+(i+1)).innerHTML=cdTx;
+}
+ch=true;cf=false;ct=false;cr=false;
+}
+
+function flop() {
+if (!ch || cf) return;
+var i, cdTx='';
+comm=new Array(); // community cards
+for (i=0;i<3;i++) {
+comm[i]=[dekS.pop()];
+cdTx='<span style="color:'+(comm[i]<26?'black':'red')+'">'+dekV[comm[i]]+'</span> ';
+document.getElementById('c'+(i+1)).innerHTML=cdTx;
+}
+cf=true;
+}
+
+function turn() {
+if (!ch || !cf || ct) return;
+var cdTx='';
+comm[3]=[dekS.pop()];
+cdTx='<span style="color:'+(comm[3]<26?'black':'red')+'">'+dekV[comm[3]]+'</span> ';
+document.getElementById('c4').innerHTML=cdTx;
+ct=true;
+}
+
+function river() {
+if (!ch || !cf || !ct || cr) return;
+var cdTx='';
+comm[4]=[dekS.pop()];
+cdTx='<span style="color:'+(comm[4]<26?'black':'red')+'">'+dekV[comm[4]]+'</span> ';
+document.getElementById('c5').innerHTML=cdTx;
+cr=true;
+}
+
+</script>
+</html>
